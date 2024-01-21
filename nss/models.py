@@ -32,3 +32,4 @@ class Attendance(models.Model):
     date=models.DateField()
     roll_no=models.IntegerField()
     department=models.CharField(max_length=20)
+    event=models.CharField(max_length=64)

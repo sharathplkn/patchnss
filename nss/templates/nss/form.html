@@ -1,31 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
- 
-form {
-    text-align: left;
+{% extends 'nss/base.html'%}
+{% block style%}
+form{
+    text-align:left;
 }
-input[type="submit"] {
-    background-color: #4CAF50;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
-}
+{% endblock %}
 
-input[type="submit"]:hover {
-    background-color: #45a049;
-}
-    </style>
-</head>
-<body>
-    <div>
+{% block title %}
+    add volunteer
+{% endblock%}
+{% block content %}
     <form method="post" action="{% url 'add_volunteer' %}" align="center">
         <fieldset>
             <legend><b>Volunteer Details</b></legend>
@@ -127,6 +110,4 @@ input[type="submit"]:hover {
         <input type="submit">
         </fieldset>
     </form>
-</div>
-</body>
-</html>
+{% endblock %}

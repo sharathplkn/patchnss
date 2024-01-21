@@ -3,6 +3,9 @@ from django.http import HttpResponse
 from .models import volunteer
 from .models import Department,Attendance
 # Create your views here.
+def ns(request):
+    return render(request,'nss/home.html')
+
 def add_volunteer(request):
     if request.method=="POST":
         name=request.POST.get('name')
@@ -39,13 +42,13 @@ def view_volunteer(request):
     
 def attendance(request):
     rol = {
-        'roll': Department.objects.all()
+        'roll': Department.objects.all().order_by('roll_no').values()
     }
 
     if request.method == "POST":
         datet = request.POST.get('date')
         roll_no_list = request.POST.getlist('roll_no')
-
+        event=request.POST.get('event')
         #converting roll_numbers from string to Integers
         for roll_no_department in roll_no_list:
             # Split the value into roll_no and department_name
@@ -55,7 +58,7 @@ def attendance(request):
             roll_no = int(roll_no)
 
             # Save the attendance record
-            att = Attendance(date=datet, roll_no=roll_no, department=department_name)
+            att = Attendance(date=datet, roll_no=roll_no, department=department_name,event=event)
             att.save()
 
         return HttpResponse("Attendance Submitted")

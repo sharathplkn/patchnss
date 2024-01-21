@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'nss/base.html'%}
+{% block title %}
+    attendance
+{% endblock%}
+{% block content %}
     <form method="post" action="{% url 'attendance'%}">
         {% csrf_token %}
+    <label for="event">Event:</label>
+    <input type="text" id="event" name="event">
+    <br>
     <label for="date">Date:</label>
     <input type="date" id="date" name="date">
     <br>
@@ -30,5 +30,4 @@
         {% endfor %}
     <input type="submit">
 </form>
-</body>
-</html>
+{% endblock%}

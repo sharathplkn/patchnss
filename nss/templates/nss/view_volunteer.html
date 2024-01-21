@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script>
-        function show(){
-
-        }
-    </script>
-</head>
-<body>
+{% extends 'nss/base.html'%}
+{% block title %}
+    view_volunteer
+{% endblock%}
+{% block content %}
     {% for i in volunteer %}
-    <button onclick="show()">{{i.name}}</button>
+    {{i.name}}
     {% endfor %}
-</body>
-</html>
+
+{% endblock %}
