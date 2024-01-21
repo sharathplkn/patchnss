@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" action="{% url 'attendance'%}">
+        {% csrf_token %}
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date">
+    <br>
+    CS
+    <br>
+        {% for i in roll %}
+            {%if i.dep_name == "ComputerScience"%} 
+                <input type=checkbox id="roll_no" name="roll_no" value="{{i.roll_no}}_ComputerScience">
+                <label for="roll_no">{{i.roll_no}}</label>
+            {% endif %}
+        {% endfor %}
+    <br>
+    Maths
+    <br>
+        {% for i in roll %}
+            {%if i.dep_name == "Maths"%} 
+                <input type=checkbox id="roll_no" name="roll_no" value="{{i.roll_no}}_Maths">
+                <label for="roll_no">{{i.roll_no}}</label>
+            {% endif %}
+        {% endfor %}
+    <input type="submit">
+</form>
+</body>
+</html>

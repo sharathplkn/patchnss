@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import volunteer
-
+from .models import Department,Attendance
 # Create your views here.
 def add_volunteer(request):
     if request.method=="POST":
@@ -22,10 +22,12 @@ def add_volunteer(request):
         year_of_enrollment=request.POST.get('year_of_enrollment')
         cultural_talents=request.POST.get('cultural_talents')
         hobbies=request.POST.get('hobbies')
-
-        voluntee=volunteer(name=name,guard_name=guard_name,guard_mob_no=guard_mob_no,sex=sex,dob=dob,department=department,year=year,community=community,address=address,blood_group=blood_group,height=height,weight=weight,mobile_no=mobile_no,Email_id=Email_id,year_of_enrollment=year_of_enrollment,cultural_talents=cultural_talents,hobbies=hobbies)
+        roll_no=request.POST.get('roll_no')
+        voluntee=volunteer(name=name,guard_name=guard_name,guard_mob_no=guard_mob_no,sex=sex,dob=dob,department=department,year=year,community=community,address=address,blood_group=blood_group,height=height,weight=weight,mobile_no=mobile_no,Email_id=Email_id,year_of_enrollment=year_of_enrollment,cultural_talents=cultural_talents,hobbies=hobbies,roll_no=roll_no)
         voluntee.save()
-
+        if department=="ComputerScience":
+            dep=Department(dep_name=department,roll_no=roll_no)
+            dep.save()
         return HttpResponse('submitted')
     return render(request,'nss/form.html')
 
@@ -34,3 +36,28 @@ def view_volunteer(request):
         'volunteer':volunteer.objects.all()
     }
     return render(request,'nss/view_volunteer.html',vol)
+    
+def attendance(request):
+    rol = {
+        'roll': Department.objects.all()
+    }
+
+    if request.method == "POST":
+        datet = request.POST.get('date')
+        roll_no_list = request.POST.getlist('roll_no')
+
+        #converting roll_numbers from string to Integers
+        for roll_no_department in roll_no_list:
+            # Split the value into roll_no and department_name
+            roll_no, department_name = roll_no_department.split('_')
+
+            # Convert roll_no to an integer
+            roll_no = int(roll_no)
+
+            # Save the attendance record
+            att = Attendance(date=datet, roll_no=roll_no, department=department_name)
+            att.save()
+
+        return HttpResponse("Attendance Submitted")
+
+    return render(request, 'nss/attendance.html', rol)
