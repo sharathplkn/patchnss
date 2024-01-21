@@ -28,9 +28,8 @@ def add_volunteer(request):
         roll_no=request.POST.get('roll_no')
         voluntee=volunteer(name=name,guard_name=guard_name,guard_mob_no=guard_mob_no,sex=sex,dob=dob,department=department,year=year,community=community,address=address,blood_group=blood_group,height=height,weight=weight,mobile_no=mobile_no,Email_id=Email_id,year_of_enrollment=year_of_enrollment,cultural_talents=cultural_talents,hobbies=hobbies,roll_no=roll_no)
         voluntee.save()
-        if department=="ComputerScience":
-            dep=Department(dep_name=department,roll_no=roll_no)
-            dep.save()
+        dep=Department(dep_name=department,roll_no=roll_no,name=name)
+        dep.save()
         return HttpResponse('submitted')
     return render(request,'nss/form.html')
 
@@ -42,25 +41,30 @@ def view_volunteer(request):
     
 def attendance(request):
     rol = {
-        'roll': Department.objects.all().order_by('roll_no').values()
+        'roll': Department.objects.all()
     }
 
     if request.method == "POST":
         datet = request.POST.get('date')
-        roll_no_list = request.POST.getlist('roll_no')
+        name_list = request.POST.getlist('name')
         event=request.POST.get('event')
         #converting roll_numbers from string to Integers
-        for roll_no_department in roll_no_list:
+        for name_department in name_list:
             # Split the value into roll_no and department_name
-            roll_no, department_name = roll_no_department.split('_')
+            name, department_name = name_department.split('_')
 
             # Convert roll_no to an integer
-            roll_no = int(roll_no)
 
             # Save the attendance record
-            att = Attendance(date=datet, roll_no=roll_no, department=department_name,event=event)
+            att = Attendance(date=datet, name=name, department=department_name,event=event)
             att.save()
 
         return HttpResponse("Attendance Submitted")
 
     return render(request, 'nss/attendance.html', rol)
+
+def view_attendance(request):
+    at={
+        'atte':Attendance.objects.all().order_by('department').values()
+    }
+    return render(request,'nss/view_attendance.html',at)

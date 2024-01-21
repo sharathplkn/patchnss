@@ -20,16 +20,18 @@ class volunteer(models.Model):
     year_of_enrollment=models.IntegerField()
     cultural_talents=models.TextField()
     hobbies=models.TextField()
-    roll_no=models.IntegerField(unique=True)
+    roll_no=models.IntegerField()
+    def __str__(self):
+        return f"{self.department}"
 class Department(models.Model):
     dep_id=models.AutoField(primary_key=True)
     dep_name=models.CharField(max_length=20)
-    roll_no=models.IntegerField()
+    roll_no=models.IntegerField(null=True,unique=True)
+    name=models.CharField(max_length=30)
 
-    def __str__(self):
-        return f"{self.dep_name}"
 class Attendance(models.Model):
     date=models.DateField()
-    roll_no=models.IntegerField()
+    roll_no=models.IntegerField(null=True)
+    name=models.CharField(max_length=30)
     department=models.CharField(max_length=20)
     event=models.CharField(max_length=64)
