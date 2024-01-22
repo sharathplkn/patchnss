@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import volunteer
-from .models import Department,Attendance
+from .models import Department,Attendance,Event
+from django.db import connection
 # Create your views here.
 def ns(request):
     return render(request,'nss/home.html')
@@ -49,6 +50,9 @@ def attendance(request):
         name_list = request.POST.getlist('name')
         event=request.POST.get('event')
         #converting roll_numbers from string to Integers
+        eve=Event(eventname=event,date=datet)
+        eve.save()
+
         for name_department in name_list:
             # Split the value into roll_no and department_name
             name, department_name = name_department.split('_')
@@ -65,6 +69,19 @@ def attendance(request):
 
 def view_attendance(request):
     at={
-        'atte':Attendance.objects.all().order_by('department').values()
+        'atte':Attendance.objects.all().order_by('date','department').values()
     }
     return render(request,'nss/view_attendance.html',at)
+
+def view_attendance2(request):
+    eve = {
+        'even': Event.objects.all().order_by('date').values()
+    }
+    if request.method == "POST":
+        ev = request.POST.get('event')
+        selected_event=ev
+        res = {
+            'resul': Attendance.objects.filter(event=ev).order_by('date').values()
+        }
+        return render(request, 'nss/sample.html',{**res,**eve,'selected_event': selected_event})
+    return render(request,'nss/sample.html')

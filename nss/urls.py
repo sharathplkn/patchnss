@@ -7,4 +7,5 @@ urlpatterns=[
     path("vol",views.view_volunteer,name='view_volunteer'),
     path('rol',views.attendance,name='attendance'),
     path('att',views.view_attendance,name='view_attendance'),
+    path('att2',views.view_attendance2,name='view_attendance2'),
 ]
