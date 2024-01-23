@@ -1,0 +1,28 @@
+{% extends 'nss/base.html' %}
+
+{% block title %}
+    Volunteer Details
+{% endblock %}
+
+{% block content %}
+    {% for i in voluntee%}
+    Name:{{i.name}}<br>
+    Fathers/Guardian Name:{{i.guard_name}}<br>
+    Fathers/Guardian Mobile-No:{{i.guard_mob_no}}<br>
+    Sex:{{i.sex}}<br>
+    Date of Birth:{{i.dob}}<br>
+    Department:{{i.department}}<br>
+    Year:{{i.year}}<br>
+    Community:{{i.community}}<br>
+    Address:{{i.address}}<br>
+    Blood Group:{{i.blood_group}}<br>
+    Height:{{i.height}} Cm<br>
+    Weight:{{i.weight}} Kg<br>
+    Mobile-No:{{i.mobile_no}}<br>
+    Year of Enrollment:{{i.year_of_enrollment}}<br>
+    Roll_no:{{i.roll_no}}<br>
+    Cultural talents:{{i.cultural_talents}}<br>
+    Hobbies:{{i.hobbies}}<br>
+    {% endfor %}
+    <a href="{% url 'view_volunteer' %}" style="color: blue; text-decoration: underline;">Back to Volunteer List</a>
+{% endblock %}

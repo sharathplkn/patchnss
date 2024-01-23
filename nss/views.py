@@ -85,4 +85,10 @@ def view_attendance2(request):
             'resul': Attendance.objects.filter(event=ev).order_by('date').values()
         }
         return render(request, 'nss/sample.html',{**res,**eve,'selected_event': selected_event})
-    return render(request,'nss/sample.html')
+    return render(request,'nss/sample.html',eve)
+def volunteer_details(request, volunteer_name):
+    # Assuming you have a Volunteer model with a 'name' field
+    voluntee = volunteer.objects.filter(volunteer_id=volunteer_name)
+    print(voluntee)
+    # Pass the volunteer details to the template
+    return render(request, 'nss/volunteer_details.html', {'voluntee': voluntee})
