@@ -49,8 +49,9 @@ def attendance(request):
         datet = request.POST.get('date')
         name_list = request.POST.getlist('name')
         event=request.POST.get('event')
+        time=request.POST.get('time')
         #converting roll_numbers from string to Integers
-        eve=Event(eventname=event,date=datet)
+        eve=Event(eventname=event,date=datet,time=time)
         eve.save()
 
         for name_department in name_list:
