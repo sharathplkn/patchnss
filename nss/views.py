@@ -3,10 +3,13 @@ from django.http import HttpResponse
 from .models import volunteer
 from .models import Department,Attendance,Event
 from django.db import connection
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
+@login_required()
 def ns(request):
     return render(request,'nss/home.html')
-
+@login_required()
 def add_volunteer(request):
     if request.method=="POST":
         name=request.POST.get('name')
@@ -33,13 +36,13 @@ def add_volunteer(request):
         dep.save()
         return HttpResponse('submitted')
     return render(request,'nss/form.html')
-
+@login_required()
 def view_volunteer(request):
     vol={
         'volunteer':volunteer.objects.all()
     }
     return render(request,'nss/view_volunteer.html',vol)
-    
+@login_required()
 def attendance(request):
     rol = {
         'roll': Department.objects.all()
@@ -67,13 +70,13 @@ def attendance(request):
         return HttpResponse("Attendance Submitted")
 
     return render(request, 'nss/attendance.html', rol)
-
+@login_required()
 def view_attendance(request):
     at={
         'atte':Attendance.objects.all().order_by('date','department').values()
     }
     return render(request,'nss/view_attendance.html',at)
-
+@login_required()
 def view_attendance2(request):
     eve = {
         'even': Event.objects.all().order_by('date').values()
@@ -86,6 +89,7 @@ def view_attendance2(request):
         }
         return render(request, 'nss/sample.html',{**res,**eve,'selected_event': selected_event})
     return render(request,'nss/sample.html',eve)
+@login_required()
 def volunteer_details(request, volunteer_name):
     # Assuming you have a Volunteer model with a 'name' field
     voluntee = volunteer.objects.filter(volunteer_id=volunteer_name)
