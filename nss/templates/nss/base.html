@@ -63,7 +63,10 @@
         </ul>
     </nav>
   </div>
-  <a href="{% url 'logout' %}" style="color:black;background-color:cornflowerblue;border-radius: 5%;padding: 4px;">Logout</a>
+  <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+  </form>
     <br>
     <br>
     {% block content %}
