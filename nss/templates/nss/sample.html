@@ -6,7 +6,7 @@
         <label for="event">event</label>
         <select id="event" name="event">
             {% for i in even %}
-                <option value="{{ i.eventname }}">{{ i.eventname }}</option>
+                <option value="{{ i.event_name }}">{{ i.event_name }}</option>
             {% endfor %}
         </select>
         <input type="submit">

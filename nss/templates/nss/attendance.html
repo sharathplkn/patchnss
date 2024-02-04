@@ -6,9 +6,11 @@
     <form method="post" action="{% url 'attendance'%}">
         {% csrf_token %}
     <label for="event">Event:</label>
-    <br>
-    <input type="text" id="event" name="event">
-    <br>
+    <select id="event" name="event">
+    {% for i in even %}
+    <option value="{{ i.event_name }}">{{ i.event_name }}</option>
+    {% endfor %}
+    </select><br>
     <label for="date">Date:</label>
     <br>
     <input type="date" id="date" name="date">
@@ -20,8 +22,8 @@
     <br>
     Computer Science
     <br>
-        {% for i in roll %}
-            {%if i.dep_name == "ComputerScience"%} 
+        {% for i in vol %}
+            {%if i.department == "ComputerScience"%} 
                 <input type=checkbox id="name" name="name" value="{{i.name}}_ComputerScience">
                 <label for="name">{{i.name}}</label>
             {% endif %}
@@ -29,8 +31,8 @@
     <br>
     Maths
     <br>
-        {% for i in roll %}
-            {%if i.dep_name == "Maths"%} 
+        {% for i in vol %}
+            {%if i.department == "Maths"%} 
                 <input type=checkbox id="name" name="name" value="{{i.name}}_Maths">
                 <label for="name">{{i.name}}</label>
             {% endif %}
@@ -38,8 +40,8 @@
     <br>
     Statistics
     <br>
-        {% for i in roll %}
-            {%if i.dep_name == "Statistics"%} 
+        {% for i in vol %}
+            {%if i.department == "Statistics"%} 
                 <input type=checkbox id="name" name="name" value="{{i.name}}_Statistics">
                 <label for="name">{{i.name}}</label>
             {% endif %}
@@ -47,8 +49,8 @@
     <br>
     Commerce
     <br>
-        {% for i in roll %}
-            {%if i.dep_name == "commerce"%} 
+        {% for i in vol %}
+            {%if i.department == "commerce"%} 
                 <input type=checkbox id="name" name="name" value="{{i.name}}_commerce">
                 <label for="name">{{i.name}}</label>
             {% endif %}
@@ -56,8 +58,8 @@
         <br>
     Chemistry
     <br>
-        {% for i in roll %}
-            {%if i.dep_name == "Chemistry"%} 
+        {% for i in vol %}
+            {%if i.department == "Chemistry"%} 
                 <input type=checkbox id="name" name="name" value="{{i.name}}_chemistry">
                 <label for="name">{{i.name}}</label>
             {% endif %}
@@ -65,8 +67,8 @@
     <br>
     PlantScience
     <br>
-        {% for i in roll %}
-            {%if i.dep_name == "Botany"%} 
+        {% for i in vol %}
+            {%if i.department == "Botany"%} 
                 <input type=checkbox id="name" name="name" value="{{i.name}}_Botany">
                 <label for="name">{{i.name}}</label>
             {% endif %}
@@ -74,8 +76,8 @@
     <br>
     Economics
     <br>
-        {% for i in roll %}
-            {%if i.dep_name == "Economics"%} 
+        {% for i in vol %}
+            {%if i.department == "Economics"%} 
                 <input type=checkbox id="name" name="name" value="{{i.name}}_Economics">
                 <label for="name">{{i.name}}</label>
             {% endif %}
@@ -83,8 +85,8 @@
     <br>
     History
     <br>
-        {% for i in roll %}
-            {%if i.dep_name == "History"%} 
+        {% for i in vol %}
+            {%if i.department == "History"%} 
                 <input type=checkbox id="name" name="name" value="{{i.name}}_History">
                 <label for="name">{{i.name}}</label>
             {% endif %}
@@ -92,8 +94,8 @@
     <br>
     Malayalam
     <br>
-        {% for i in roll %}
-            {%if i.dep_name == "Malayalam"%} 
+        {% for i in vol %}
+            {%if i.department == "Malayalam"%} 
                 <input type=checkbox id="name" name="name" value="{{i.name}}_Malayalam">
                 <label for="name">{{i.name}}</label>
             {% endif %}

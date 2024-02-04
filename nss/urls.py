@@ -9,4 +9,6 @@ urlpatterns=[
     path('att',views.view_attendance,name='view_attendance'),
     path('att2',views.view_attendance2,name='view_attendance2'),
     path('volunteer/<str:volunteer_name>/',views.volunteer_details, name='volunteer_details'),
+    path('even',views.add_event,name='event'),
+    path('report',views.report,name='report'),
 ]
