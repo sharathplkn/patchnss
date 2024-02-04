@@ -1,0 +1,22 @@
+<div align="center">
+<h1>NSS Management System NASC</h1>
+<h1>Login</h1>
+<style>
+    div{
+        margin: 10%;
+    }
+    input[type="submit"]{
+        background-color:cornflowerblue;
+    }
+    body{
+        background-color: bisque;
+    }
+</style>
+<center>
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="login">
+</form>
+</center>
+</div>

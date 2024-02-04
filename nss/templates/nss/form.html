@@ -1,46 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
- 
-form {
-    text-align: left;
+{% extends 'nss/base.html'%}
+{% block style%}
+form{
+    text-align:left;
 }
-input[type="submit"] {
-    background-color: #4CAF50;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
-}
+{% endblock %}
 
-input[type="submit"]:hover {
-    background-color: #45a049;
-}
-    </style>
-</head>
-<body>
-    <div>
-    <form method="post" action="{% url 'add_volunteer' %}" align="center">
+{% block title %}
+    add volunteer
+{% endblock%}
+{% block content %}
+    <form method="post" action="{% url 'add_volunteer' %}" align="center" enctype="multipart/form-data">
         <fieldset>
             <legend><b>Volunteer Details</b></legend>
         {% csrf_token %}
         <label for="name">Name:</label>
         <br>
-        <input type="text" id="name" name="name">
+        <input type="text" id="name" name="name" required>
         <br><br>
         <label for="guard_name">Fathers/Guardian Name:</label>
         <br>
-        <input type="text" id="guard_name" name="guard_name">
+        <input type="text" id="guard_name" name="guard_name" required>
         <br><br>
         <label for="guard_mob_no">Fathers/Guardian Mobile-No:</label>
         <br>
-        <input type="number" id="guard_mob_no" name="guard_mob_no">
+        <input type="number" id="guard_mob_no" name="guard_mob_no" required>
         <br><br>
         Sex:
         <br>
@@ -51,26 +34,32 @@ input[type="submit"]:hover {
         <br><br>
         <label for="dob">Date of Birth:</label>
         <br>
-        <input type="date" id="dob" name="dob">
+        <input type="date" id="dob" name="dob" required>
+        <br><br>
+        <label for="image">image:</label>
+        <br>
+        <input type="file" id="image" name="image" required>
         <br><br>
         <label for="department">Department:</label>
-        <select id="department" name="department">
-            <option>ComputerScience</option>
-            <option>Maths</option>
-            <option>Statistics</option>
-            <option>commerce</option>
-            <option>Chemistry</option>
-            <option>Botany</option>
-            <option>Economics</option>
-            <option>History</option>
-            <option>Malayalam</option>
-        </select>
+        <select id="department" name="department" required>
+            <option value="" disabled selected>Select Department</option>
+            <option value="ComputerScience">Computer Science</option>
+            <option value="Maths">Maths</option>
+            <option value="Statistics">Statistics</option>
+            <option value="commerce">Commerce</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Botany">Botany</option>
+            <option value="Economics">Economics</option>
+            <option value="History">History</option>
+            <option value="Malayalam">Malayalam</option>
+        </select>        
         <label for="year">Year:</label>
-        <select id="year" name="year">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-        </select>
+        <select id="year" name="year" required>
+            <option value="" disabled selected>Select Year</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>        
         <br><br>
         Community:
         <input type="radio" id="community" name="community" value="General">
@@ -84,49 +73,47 @@ input[type="submit"]:hover {
         <br><br>
         <label for="address">Address:</label>
         <br>
-        <textarea id="address" rows="5" cols="25" name="address"></textarea>
+        <textarea id="address" rows="5" cols="25" name="address" required></textarea>
         <br><br>
         <label for="blood_group">Blood Group:</label>
         <br>
-        <input type="text" id="blood_group" name="blood_group">
+        <input type="text" id="blood_group" name="blood_group" required>
         <br><br>
         <label for="height">height(in cm)</label>
         <br>
-        <input type="number" id="height" name="height">
+        <input type="number" id="height" name="height" required>
         <br><br>
         <label for="weight">weight(in kg)</label>
         <br>
-        <input type="number" id="weight" name="weight">
+        <input type="number" id="weight" name="weight" required>
         <br><br>
         <label for="mobile_no">Mobile-No:</label>
         <br>
-        <input type="number" id="mobile_no" name="mobile_no" pattern="\d{10}">
+        <input type="number" id="mobile_no" name="mobile_no" pattern="\d{10}" required>
         <br><br>
         <label for="Email_id">Email:</label>
         <br>
-        <input type="email" id="Email_id" name="Email_id">
+        <input type="email" id="Email_id" name="Email_id" required>
         <br><br>
         <label for="year_of_enrollment">Year of Enrollment:</label>
         <br>
-        <input type="number" id="year_of_enrollment" name="year_of_enrollment">
+        <input type="number" id="year_of_enrollment" name="year_of_enrollment" required>
         <br><br>
         <label for="roll_no">Roll_no</label>
         <br>
-        <input type="number" id="roll_no" name="roll_no">
+        <input type="number" id="roll_no" name="roll_no" required>
         <br><br>
         <label for="cultural_talents">Cultural talents:</label>
         <br>
-        <textarea id="cultural_talents" rows="5" name="cultural_talents">
+        <textarea id="cultural_talents" rows="5" name="cultural_talents" required>
         </textarea>
         <br><br>
         <label for="hobbies">Hobbies:</label>
         <br>
-        <textarea id="hobbies" rows="5" name="hobbies">
+        <textarea id="hobbies" rows="5" name="hobbies" required>
         </textarea>
         <br><br>
-        <input type="submit">
+        <input type="submit" value="submit">
         </fieldset>
     </form>
-</div>
-</body>
-</html>
+{% endblock %}

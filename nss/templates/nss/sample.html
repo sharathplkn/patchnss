@@ -1,0 +1,32 @@
+{% extends 'nss/base.html' %}
+
+{% block content %}
+    <form method="post" action="{% url 'view_attendance2' %}">
+        {%csrf_token %}
+        <label for="event">event</label>
+        <select id="event" name="event">
+            {% for i in even %}
+                <option value="{{ i.event_name }}">{{ i.event_name }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit">
+    </form>
+        <h1>{{ selected_event }}</h1>
+    <table border="1px">
+        <tr>
+            <th>Name</th>
+            <th>Department</th>
+        </tr>
+        {% for i in resul %}
+            <tr>
+                <td>{{ i.name }}</td>
+                <td>{{ i.department }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    Full Report: 
+
+            <a href="{%url 'view_attendance'%}" style="color:black">view_attendance</a>
+  
+{% endblock %}

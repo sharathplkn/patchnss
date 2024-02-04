@@ -1,34 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'nss/base.html'%}
+{% block title %}
+    attendance
+{% endblock%}
+{% block content %}
     <form method="post" action="{% url 'attendance'%}">
         {% csrf_token %}
+    <label for="event">Event:</label>
+    <select id="event" name="event">
+    {% for i in even %}
+    <option value="{{ i.event_name }}">{{ i.event_name }}</option>
+    {% endfor %}
+    </select><br>
     <label for="date">Date:</label>
+    <br>
     <input type="date" id="date" name="date">
     <br>
-    CS
+    <label for="time">Number of hours:</label>
     <br>
-        {% for i in roll %}
-            {%if i.dep_name == "ComputerScience"%} 
-                <input type=checkbox id="roll_no" name="roll_no" value="{{i.roll_no}}_ComputerScience">
-                <label for="roll_no">{{i.roll_no}}</label>
+    <input type="number" id="time" name="time">
+    <br>
+    <br>
+    Computer Science
+    <br>
+        {% for i in vol %}
+            {%if i.department == "ComputerScience"%} 
+                <input type=checkbox id="name" name="name" value="{{i.name}}_ComputerScience">
+                <label for="name">{{i.name}}</label>
             {% endif %}
         {% endfor %}
     <br>
     Maths
     <br>
-        {% for i in roll %}
-            {%if i.dep_name == "Maths"%} 
-                <input type=checkbox id="roll_no" name="roll_no" value="{{i.roll_no}}_Maths">
-                <label for="roll_no">{{i.roll_no}}</label>
+        {% for i in vol %}
+            {%if i.department == "Maths"%} 
+                <input type=checkbox id="name" name="name" value="{{i.name}}_Maths">
+                <label for="name">{{i.name}}</label>
             {% endif %}
         {% endfor %}
-    <input type="submit">
+    <br>
+    Statistics
+    <br>
+        {% for i in vol %}
+            {%if i.department == "Statistics"%} 
+                <input type=checkbox id="name" name="name" value="{{i.name}}_Statistics">
+                <label for="name">{{i.name}}</label>
+            {% endif %}
+        {% endfor %}
+    <br>
+    Commerce
+    <br>
+        {% for i in vol %}
+            {%if i.department == "commerce"%} 
+                <input type=checkbox id="name" name="name" value="{{i.name}}_commerce">
+                <label for="name">{{i.name}}</label>
+            {% endif %}
+        {% endfor %}
+        <br>
+    Chemistry
+    <br>
+        {% for i in vol %}
+            {%if i.department == "Chemistry"%} 
+                <input type=checkbox id="name" name="name" value="{{i.name}}_chemistry">
+                <label for="name">{{i.name}}</label>
+            {% endif %}
+        {% endfor %}
+    <br>
+    PlantScience
+    <br>
+        {% for i in vol %}
+            {%if i.department == "Botany"%} 
+                <input type=checkbox id="name" name="name" value="{{i.name}}_Botany">
+                <label for="name">{{i.name}}</label>
+            {% endif %}
+        {% endfor %}
+    <br>
+    Economics
+    <br>
+        {% for i in vol %}
+            {%if i.department == "Economics"%} 
+                <input type=checkbox id="name" name="name" value="{{i.name}}_Economics">
+                <label for="name">{{i.name}}</label>
+            {% endif %}
+        {% endfor %}
+    <br>
+    History
+    <br>
+        {% for i in vol %}
+            {%if i.department == "History"%} 
+                <input type=checkbox id="name" name="name" value="{{i.name}}_History">
+                <label for="name">{{i.name}}</label>
+            {% endif %}
+        {% endfor %}
+    <br>
+    Malayalam
+    <br>
+        {% for i in vol %}
+            {%if i.department == "Malayalam"%} 
+                <input type=checkbox id="name" name="name" value="{{i.name}}_Malayalam">
+                <label for="name">{{i.name}}</label>
+            {% endif %}
+        {% endfor %}
+    <input type="submit" value="submit">
 </form>
-</body>
-</html>
+{% endblock%}
