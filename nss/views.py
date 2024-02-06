@@ -91,8 +91,9 @@ def view_attendance2(request):
     if request.method == "POST":
         ev = request.POST.get('event')
         selected_event=ev
+        event_id=Event.objects.get(event_name=ev).event_id
         res = {
-            'resul': Attendance.objects.filter(event.event_name=ev).order_by('date').values()
+            'resul': Attendance.objects.filter(event=event_id).order_by('date').values()
         }
         return render(request, 'nss/sample.html',{**res,**eve,'selected_event': selected_event})
     return render(request,'nss/sample.html',eve)
