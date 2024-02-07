@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import volunteer
-from .models import Department,Attendance,Event,Programme
+from .models import *
 from django.db import connection
 from django.contrib.auth.decorators import login_required
 
@@ -109,19 +108,43 @@ def volunteer_details(request, volunteer_name):
     }
     # Pass the volunteer details to the template
     return render(request, 'nss/volunteer_details.html', {**vol,**ev})
+
+@login_required()
+def event(request):
+
+    return render(request,'nss/event.html')
+
+
+
 @login_required()
 def add_event(request):
-    if request.method=="POST" and request.FILES:
+    if request.method=="POST":
         event_name=request.POST.get('event_name')
         date=request.POST.get('date')
-        start_time=request.POST.get('start_time')
-        end_time=request.POST.get('end_time')
-        photo=request.FILES.get('photo')
-        des=request.POST.get('des')
-        ev=Event(des=des,event_name=event_name,date=date,start_time=start_time,end_time=end_time,photo=photo)
+        ev=Event(event_name=event_name,date=date)
         ev.save()
         return HttpResponse('submitted')
     return render(request,'nss/add_event.html')
+
+@login_required()
+def event_details(request):
+    eve = {
+        'even': Event.objects.all().order_by('date').values()
+    }
+    if request.method=="POST":
+        event=request.POST.get('event_name')
+        start_time=request.POST.get('start_time')
+        end_time=request.POST.get('end_time')
+        des=request.POST.get('des')
+        event_id=Event.objects.get(event_name=event)
+        event_exists = Event_details.objects.filter(event=event_id).exists()
+        if not event_exists:
+            ev=Event_details(event=event_id,start_time=start_time,end_time=end_time,des=des)
+            ev.save()
+            return HttpResponse('submitted')
+        else:
+            return HttpResponse('Already Exist')
+    return render(request,'nss/event_details.html',eve)
 
 @login_required()
 def report(request):
@@ -129,3 +152,17 @@ def report(request):
         'event':Event.objects.all()
     }
     return render(request,'nss/report.html',report)
+
+@login_required()
+def event_photos(request):
+    eve = {
+        'even': Event.objects.all().order_by('date').values()
+    }
+    if request.method == "POST" and request.FILES:
+        photo=request.FILES.get('photo')
+        event=request.POST.get('event_name')
+        event_id=Event.objects.get(event_name=event)
+        ev=Event_Photos(photo=photo,event=event_id)
+        ev.save()
+        return HttpResponse('submitted')
+    return render(request,'nss/add_photos.html',eve)

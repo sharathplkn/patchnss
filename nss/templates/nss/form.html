@@ -43,9 +43,27 @@ form{
         <label for="programme">programme:</label>
         <select id="programme" name="programme" required>
             <option value="" disabled selected>Select programme</option>
-            {% for i in dep %}
-            <option>{{i.program_name}}</option>
-            {% endfor %}
+            <optgroup label="UG">
+                {% for i in dep %}
+                    {% if i.grad_level == 'ug' %}
+                        <option>{{ i.program_name }}</option>
+                    {% endif %}
+                {% endfor %}
+            </optgroup> 
+            <optgroup label="IPG">
+                {% for i in dep %}
+                    {% if i.grad_level == 'ipg' %}
+                        <option>{{ i.program_name }}</option>
+                    {% endif %}
+                {% endfor %}
+            </optgroup> 
+            <optgroup label="PG">
+                {% for i in dep %}
+                    {% if i.grad_level == 'pg' %}
+                        <option>{{ i.program_name }}</option>
+                    {% endif %}
+                {% endfor %}
+            </optgroup>            
         </select>        
         <label for="year">Year:</label>
         <select id="year" name="year" required>
@@ -70,8 +88,16 @@ form{
         <textarea id="address" rows="5" cols="25" name="address" required></textarea>
         <br><br>
         <label for="blood_group">Blood Group:</label>
-        <br>
-        <input type="text" id="blood_group" name="blood_group" required>
+        <select id="blood_group" name="blood_group">
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B</option>
+            <option value="O+">O</option>
+            <option value="O-">O-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+          </select>          
         <br><br>
         <label for="height">height(in cm)</label>
         <br>
