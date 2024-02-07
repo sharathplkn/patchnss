@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import volunteer
-from .models import Department,Attendance,Event
+from .models import Department,Attendance,Event,Programme
 from django.db import connection
 from django.contrib.auth.decorators import login_required
 
@@ -11,13 +11,16 @@ def ns(request):
     return render(request,'nss/home.html')
 @login_required()
 def add_volunteer(request):
+    prog={
+        'dep':Programme.objects.all()
+    }
     if request.method=="POST" and request.FILES:
         name=request.POST.get('name')
         guard_name=request.POST.get('guard_name')
         guard_mob_no=request.POST.get('guard_mob_no')
         sex=request.POST.get('sex')
         dob=request.POST.get('dob')
-        department=request.POST.get('department')
+        programme_name=request.POST.get('programme')
         year=request.POST.get('year')
         community=request.POST.get('community')
         address=request.POST.get('address')
@@ -30,13 +33,14 @@ def add_volunteer(request):
         cultural_talents=request.POST.get('cultural_talents')
         hobbies=request.POST.get('hobbies')
         roll_no=request.POST.get('roll_no')
-        image=request.FILES.get ('image')
-        voluntee=volunteer(image=image,name=name,guard_name=guard_name,guard_mob_no=guard_mob_no,sex=sex,dob=dob,department=department,year=year,community=community,address=address,blood_group=blood_group,height=height,weight=weight,mobile_no=mobile_no,Email_id=Email_id,year_of_enrollment=year_of_enrollment,cultural_talents=cultural_talents,hobbies=hobbies,roll_no=roll_no)
+        image=request.FILES.get ('image')   
+        programme_id=Programme.objects.get(program_name=programme_name)
+        print(programme_id)
+        voluntee=volunteer(image=image,name=name,guard_name=guard_name,guard_mob_no=guard_mob_no,sex=sex,dob=dob,program=programme_id,year=year,community=community,address=address,blood_group=blood_group,height=height,weight=weight,mobile_no=mobile_no,Email_id=Email_id,year_of_enrollment=year_of_enrollment,cultural_talents=cultural_talents,hobbies=hobbies,roll_no=roll_no)
         voluntee.save()
-        dep=Department(dep_name=department,roll_no=roll_no,name=name)
-        dep.save()
+
         return HttpResponse('submitted')
-    return render(request,'nss/form.html')
+    return render(request,'nss/form.html',prog)
 @login_required()
 def view_volunteer(request):
     vol={
@@ -66,7 +70,8 @@ def attendance(request):
             # Convert roll_no to an integer
             volunteer_instance= volunteer.objects.get(name=name)
             # Save the attendance record
-            att = Attendance(vol_id=volunteer_instance,date=datet, name=name, department=department_name,event=event)
+            event=Event.objects.get(event_name=event)
+            att = Attendance(volunteer=volunteer_instance,date=datet, name=name, department=department_name,event=event)
             att.save()
 
         return HttpResponse("Attendance Submitted")
@@ -86,8 +91,9 @@ def view_attendance2(request):
     if request.method == "POST":
         ev = request.POST.get('event')
         selected_event=ev
+        event_id=Event.objects.get(event_name=ev).event_id
         res = {
-            'resul': Attendance.objects.filter(event=ev).order_by('date').values()
+            'resul': Attendance.objects.filter(event=event_id).order_by('date').values()
         }
         return render(request, 'nss/sample.html',{**res,**eve,'selected_event': selected_event})
     return render(request,'nss/sample.html',eve)
@@ -99,7 +105,7 @@ def volunteer_details(request, volunteer_name):
     }
     
     ev={
-        'even':Attendance.objects.filter(vol_id=volunteer_name)
+        'even':Attendance.objects.filter(volunteer=volunteer_name)
     }
     # Pass the volunteer details to the template
     return render(request, 'nss/volunteer_details.html', {**vol,**ev})

@@ -23,7 +23,7 @@
     Computer Science
     <br>
         {% for i in vol %}
-            {%if i.department == "ComputerScience"%} 
+            {%if i.program.dept.dep_name == "ComputerScience"%} 
                 <input type=checkbox id="name" name="name" value="{{i.name}}_ComputerScience">
                 <label for="name">{{i.name}}</label>
             {% endif %}
@@ -32,7 +32,7 @@
     Maths
     <br>
         {% for i in vol %}
-            {%if i.department == "Maths"%} 
+            {%if i.program.dept.dep_name == "Maths"%} 
                 <input type=checkbox id="name" name="name" value="{{i.name}}_Maths">
                 <label for="name">{{i.name}}</label>
             {% endif %}
@@ -41,7 +41,7 @@
     Statistics
     <br>
         {% for i in vol %}
-            {%if i.department == "Statistics"%} 
+            {%if i.program.dept.dep_name == "Statistics"%} 
                 <input type=checkbox id="name" name="name" value="{{i.name}}_Statistics">
                 <label for="name">{{i.name}}</label>
             {% endif %}
@@ -50,7 +50,7 @@
     Commerce
     <br>
         {% for i in vol %}
-            {%if i.department == "commerce"%} 
+            {%if i.program.dept.dep_name == "commerce"%} 
                 <input type=checkbox id="name" name="name" value="{{i.name}}_commerce">
                 <label for="name">{{i.name}}</label>
             {% endif %}
@@ -59,7 +59,7 @@
     Chemistry
     <br>
         {% for i in vol %}
-            {%if i.department == "Chemistry"%} 
+            {%if i.program.dept.dep_name == "Chemistry"%} 
                 <input type=checkbox id="name" name="name" value="{{i.name}}_chemistry">
                 <label for="name">{{i.name}}</label>
             {% endif %}
@@ -68,7 +68,7 @@
     PlantScience
     <br>
         {% for i in vol %}
-            {%if i.department == "Botany"%} 
+            {%if i.program.dept.dep_name == "Botany"%} 
                 <input type=checkbox id="name" name="name" value="{{i.name}}_Botany">
                 <label for="name">{{i.name}}</label>
             {% endif %}
@@ -77,7 +77,7 @@
     Economics
     <br>
         {% for i in vol %}
-            {%if i.department == "Economics"%} 
+            {%if i.program.dept.dep_name == "Economics"%} 
                 <input type=checkbox id="name" name="name" value="{{i.name}}_Economics">
                 <label for="name">{{i.name}}</label>
             {% endif %}
@@ -86,7 +86,7 @@
     History
     <br>
         {% for i in vol %}
-            {%if i.department == "History"%} 
+            {%if i.program.dept.dep_name == "History"%} 
                 <input type=checkbox id="name" name="name" value="{{i.name}}_History">
                 <label for="name">{{i.name}}</label>
             {% endif %}
@@ -95,7 +95,7 @@
     Malayalam
     <br>
         {% for i in vol %}
-            {%if i.department == "Malayalam"%} 
+            {%if i.program.dept.dep_name == "Malayalam"%} 
                 <input type=checkbox id="name" name="name" value="{{i.name}}_Malayalam">
                 <label for="name">{{i.name}}</label>
             {% endif %}

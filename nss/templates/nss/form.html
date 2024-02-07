@@ -40,18 +40,12 @@ form{
         <br>
         <input type="file" id="image" name="image" required>
         <br><br>
-        <label for="department">Department:</label>
-        <select id="department" name="department" required>
-            <option value="" disabled selected>Select Department</option>
-            <option value="ComputerScience">Computer Science</option>
-            <option value="Maths">Maths</option>
-            <option value="Statistics">Statistics</option>
-            <option value="commerce">Commerce</option>
-            <option value="Chemistry">Chemistry</option>
-            <option value="Botany">Botany</option>
-            <option value="Economics">Economics</option>
-            <option value="History">History</option>
-            <option value="Malayalam">Malayalam</option>
+        <label for="programme">programme:</label>
+        <select id="programme" name="programme" required>
+            <option value="" disabled selected>Select programme</option>
+            {% for i in dep %}
+            <option>{{i.program_name}}</option>
+            {% endfor %}
         </select>        
         <label for="year">Year:</label>
         <select id="year" name="year" required>
