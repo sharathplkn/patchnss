@@ -151,7 +151,13 @@ def report(request):
     report={
         'event':Event.objects.all()
     }
-    return render(request,'nss/report.html',report)
+    pics={
+        'pics':Event_Photos.objects.all()
+    }
+    details={
+        'details':Event_details.objects.all()
+    }
+    return render(request,'nss/report.html',{**report,**pics,**details})
 
 @login_required()
 def event_photos(request):
@@ -166,3 +172,6 @@ def event_photos(request):
         ev.save()
         return HttpResponse('submitted')
     return render(request,'nss/add_photos.html',eve)
+def event2(request):
+
+    return render(request,'nss/event2.html')

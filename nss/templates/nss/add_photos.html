@@ -1,6 +1,6 @@
 {% extends 'nss/base.html' %}
 {% block content %}
-    <form method="post">
+    <form method="post" action="{% url 'event_photos'%}" enctype="multipart/form-data">
         {% csrf_token %}
         <label for="event_name">Event:</label>
         <select id="event_name" name="event_name">
