@@ -1,5 +1,22 @@
 {% extends 'nss/base.html' %}
+
 {% block content %}
-    <a href="{% url 'event_details'%}" style="color: blue; text-decoration: underline;">Event_Details</a><br>
-    <a href="{% url 'event_photos'%}" style="color: blue; text-decoration: underline;">Events_Pictures</a>
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <a href="{% url 'event_details'%}" class="link">Event Details</a><br>
+    <a href="{% url 'event_photos'%}" class="link">Event Pictures</a>
+  </div>
+
+  <style>
+    .link {
+      color: #007bff;
+      text-decoration: none;
+      font-size: 18px;
+      margin: 10px;
+      transition: color 0.3s;
+    }
+
+    .link:hover {
+      color: #0056b3;
+    }
+  </style>
 {% endblock %}
